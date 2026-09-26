@@ -10,6 +10,7 @@
 #include <cstdio>
 #include <cstring>
 #include <cstdlib>
+#include <cerrno>
 #include <fcntl.h>
 #include <unistd.h>
 #include <sys/mman.h>
