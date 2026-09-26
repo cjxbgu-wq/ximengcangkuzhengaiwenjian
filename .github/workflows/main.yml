@@ -8,6 +8,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: vcam15
     steps:
       - name: 拉取代码
         uses: actions/checkout@v4
@@ -39,5 +42,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Debug-APK
-          path: app/build/outputs/apk/debug/*.apk
+          path: vcam15/app/build/outputs/apk/debug/*.apk
           if-no-files-found: error
