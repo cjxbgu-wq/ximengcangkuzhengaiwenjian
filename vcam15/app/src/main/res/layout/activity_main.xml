@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="虚拟摄像头 Android 15"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
+        android:paddingBottom="12dp" />
+
+    <!-- Status -->
+    <TextView
+        android:id="@+id/tvStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="状态: 未启动"
+        android:textSize="16sp"
+        android:paddingBottom="4dp" />
+
+    <TextView
+        android:id="@+id/tvSource"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="来源: 未选择"
+        android:textSize="14sp"
+        android:paddingBottom="12dp" />
+
+    <!-- Source selection -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="选择视频来源："
+        android:textStyle="bold"
+        android:paddingBottom="8dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="16dp">
+
+        <Button
+            android:id="@+id/btnPickFile"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="本地视频"
+            android:layout_marginEnd="8dp" />
+
+        <Button
+            android:id="@+id/btnRtmp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="RTMP流" />
+
+    </LinearLayout>
+
+    <!-- Mirror toggle -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingBottom="16dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="水平镜像" />
+
+        <Switch
+            android:id="@+id/switchMirror"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <!-- Start / Stop -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="16dp">
+
+        <Button
+            android:id="@+id/btnStart"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="启动虚拟摄像头"
+            android:backgroundTint="@color/colorPrimary"
+            android:textColor="#FFFFFF"
+            android:layout_marginEnd="8dp" />
+
+        <Button
+            android:id="@+id/btnStop"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="停止"
+            android:backgroundTint="#F44336"
+            android:textColor="#FFFFFF" />
+
+    </LinearLayout>
+
+    <!-- Floating window -->
+    <Button
+        android:id="@+id/btnFloat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="显示悬浮控制窗"
+        android:backgroundTint="@color/colorAccent" />
+
+    <!-- Info -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="说明：\n• 需要Root权限\n• 启动后打开任意相机应用即可看到替换画面\n• 重启cameraserver后需重新注入"
+        android:textSize="12sp"
+        android:textColor="#888888" />
+
+</LinearLayout>
