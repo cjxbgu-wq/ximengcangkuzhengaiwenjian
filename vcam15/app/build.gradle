@@ -1,0 +1,106 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    namespace 'com.nvshen.chmp4'
+    compileSdk 35
+    ndkVersion "26.1.10909125"
+
+    defaultConfig {
+        applicationId "com.nvshen.chmp4"
+        minSdk 26
+        targetSdk 35
+        versionCode 20500
+        versionName "2.0.50-android15"
+
+        ndk {
+            abiFilters 'arm64-v8a'
+        }
+
+        externalNativeBuild {
+            cmake {
+                cppFlags "-std=c++17 -fvisibility=hidden -O2"
+                arguments "-DANDROID_STL=c++_shared", "-DANDROID_PLATFORM=android-26"
+            }
+        }
+    }
+
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+            version "3.22.1"
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
+        }
+        debug {
+            minifyEnabled false
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['src/main/jniLibs']
+        }
+    }
+
+    packaging {
+        jniLibs {
+            useLegacyPackaging = true
+        }
+    }
+}
+
+// CMake 编译完成后，把 injector 可执行文件拷到 assets
+tasks.whenTaskAdded { task ->
+    if (task.name ==~ /compile.*ReleaseNdk.*/ || task.name ==~ /buildCMakeRelease.*/ ||
+        task.name ==~ /compile.*DebugNdk.*/   || task.name ==~ /buildCMakeDebug.*/) {
+        task.doLast {
+            def abiDir = layout.buildDirectory.dir("intermediates/cmake").get().asFile
+            if (abiDir.exists()) {
+                abiDir.eachFileRecurse { f ->
+                    if (f.name == 'vcam_injector' && !f.name.endsWith('.so')) {
+                        def dest = file("src/main/assets/bin")
+                        dest.mkdirs()
+                        copy {
+                            from f
+                            into dest
+                            rename { 'vcam_injector' }
+                        }
+                        println "Copied injector to assets/bin/"
+                    }
+                }
+            }
+        }
+    }
+}
+
+dependencies {
+    implementation 'androidx.core:core-ktx:1.12.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.11.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.7.0'
+    implementation 'androidx.lifecycle:lifecycle-service:2.7.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
+}
