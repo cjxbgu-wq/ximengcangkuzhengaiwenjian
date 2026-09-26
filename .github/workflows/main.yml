@@ -18,13 +18,12 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: 安装 Android SDK
-        uses: android-actions/setup-android@v3
-
-      - name: 安装 NDK 与 CMake
+      - name: 安装 NDK / CMake / SDK 平台
         run: |
-          yes | sdkmanager --licenses > /dev/null || true
-          sdkmanager "ndk;26.1.10909125" "cmake;3.22.1" "platforms;android-35" "build-tools;34.0.0"
+          SDKMANAGER="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
+          echo "Using sdkmanager: $SDKMANAGER"
+          yes | "$SDKMANAGER" --licenses > /dev/null 2>&1 || true
+          "$SDKMANAGER" "ndk;26.1.10909125" "cmake;3.22.1" "platforms;android-35" "build-tools;34.0.0"
 
       - name: 安装 Gradle
         uses: gradle/actions/setup-gradle@v4
