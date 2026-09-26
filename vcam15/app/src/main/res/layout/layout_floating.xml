@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="#CC000000"
+    android:padding="8dp"
+    android:gravity="center_vertical">
+
+    <TextView
+        android:id="@+id/tvFloatState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="VCam"
+        android:textColor="#00FF00"
+        android:textSize="14sp"
+        android:paddingEnd="8dp" />
+
+    <ImageButton
+        android:id="@+id/btnFloatMirror"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:src="@android:drawable/ic_menu_rotate"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:tint="#FFFFFF"
+        android:contentDescription="镜像" />
+
+    <ImageButton
+        android:id="@+id/btnFloatClose"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:src="@android:drawable/ic_menu_close_clear_cancel"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:tint="#FF5555"
+        android:contentDescription="关闭" />
+
+</LinearLayout>
